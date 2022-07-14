@@ -1,4 +1,4 @@
-import { IsArray, IsNotEmpty, IsNumber } from 'class-validator';
+import { IsNotEmpty, IsNumber } from 'class-validator';
 
 export class RequestBodyDto {
   @IsNotEmpty()
@@ -15,8 +15,7 @@ export class RequestBodyDto {
   sinopse: string;
 
   @IsNotEmpty()
-  @IsArray()
-  genres: Array<string>;
+  genre: string;
 }
 
 export class ResponseBodyDto {
@@ -25,5 +24,5 @@ export class ResponseBodyDto {
   releaseYear: number;
   duration: string;
   sinopse: string;
-  genres: Array<string>;
+  genre: string;
 }

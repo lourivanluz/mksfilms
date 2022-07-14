@@ -16,4 +16,7 @@ export class FilmsEntity {
 
   @Column({ name: 'sinopse', nullable: false, type: 'text' })
   sinopse: string;
+
+  @Column({ name: 'genre', nullable: false })
+  genre: string;
 }

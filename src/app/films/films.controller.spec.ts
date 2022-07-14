@@ -36,7 +36,7 @@ describe('FilmsController', () => {
         releaseYear: 1997,
         duration: '03:45',
         sinopse: 'nao sei como foi',
-        genres: ['romance'],
+        genre: 'romance',
       };
 
       const mockDataSave = {
