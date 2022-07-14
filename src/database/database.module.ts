@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { FilmsEntity } from 'src/app/films/entites/films.entity';
+import { GenresEntity } from 'src/app/films/entites/genres.entity';
 
 @Module({
   imports: [
@@ -14,7 +15,7 @@ import { FilmsEntity } from 'src/app/films/entites/films.entity';
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
       synchronize: true,
-      entities: [FilmsEntity],
+      entities: [FilmsEntity, GenresEntity],
       //__dirname + '/**/*.entity{.js,.ts}'
     }),
   ],

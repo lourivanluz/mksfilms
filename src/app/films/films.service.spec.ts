@@ -1,7 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { RequestBodyDto, ResponseBodyDto } from './dto/save-film.dto';
 import { FilmsEntity } from './entites/films.entity';
 import { FilmsService } from './films.service';
 
@@ -35,25 +34,26 @@ describe('FilmsService', () => {
   });
 
   describe('save', () => {
-    it('must save the movie in the database', () => {
+    it('must save the movie in the database', async () => {
+      interface result {
+        title: string;
+        releaseYear: number;
+        duration: string;
+        sinopse: string;
+        genres: Array<string>;
+      }
+
       //mock
-      const data: RequestBodyDto = {
+      const data: result = {
         title: 'O Vento Levou',
         releaseYear: 1997,
         duration: '03:45',
         sinopse: 'nao sei como foi',
-        genre: 'romance',
+        genres: ['romance'],
       };
-
-      const mockDataSave = {
-        ...data,
-      } as ResponseBodyDto;
-
-      jest.spyOn(filmrepo, 'create').mockReturnValueOnce(mockDataSave);
-      jest.spyOn(filmrepo, 'save').mockResolvedValueOnce(mockDataSave);
-
+      //jest.spyOn(filmrepo, 'save').mockResolvedValueOnce(data);
       //act
-      const result = filmService.save(data);
+      const result = await filmService.save(data);
       //expc
       expect(result).toBeDefined();
       expect(filmrepo.create).toBeCalledTimes(1);

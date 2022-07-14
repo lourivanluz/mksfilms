@@ -15,7 +15,7 @@ export class RequestBodyDto {
   sinopse: string;
 
   @IsNotEmpty()
-  genre: string;
+  genres: Array<string>;
 }
 
 export class ResponseBodyDto {
@@ -24,5 +24,5 @@ export class ResponseBodyDto {
   releaseYear: number;
   duration: string;
   sinopse: string;
-  genre: string;
+  genres: Array<string>;
 }

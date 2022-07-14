@@ -6,7 +6,6 @@ import {
   Param,
   Patch,
   Post,
-  Query,
 } from '@nestjs/common';
 import { RequestBodyDto } from './dto/save-film.dto';
 import { FilmsService, IUptadeFilm } from './films.service';
@@ -24,9 +23,8 @@ export class FilmsController {
     return this.filmservice.findAll();
   }
 
-  @Get('?genre')
-  async getfilmsByGenre(@Query('genre') genre: string) {
-    console.log(genre);
+  @Get('/genre/:genre')
+  async getfilmsByGenre(@Param('genre') genre: string) {
     return this.filmservice.getFilmByGenre(genre);
   }
 
