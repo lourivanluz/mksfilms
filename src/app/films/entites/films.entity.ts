@@ -27,4 +27,13 @@ export class FilmsEntity {
   @ManyToMany(() => GenresEntity)
   @JoinTable()
   genres: Array<GenresEntity>;
+
+  constructor(film?: Partial<FilmsEntity>) {
+    this.id = film?.id;
+    this.title = film?.title;
+    this.releaseYear = film?.releaseYear;
+    this.duration = film?.duration;
+    this.sinopse = film?.sinopse;
+    this.genres = film?.genres;
+  }
 }

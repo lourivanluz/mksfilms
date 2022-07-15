@@ -96,7 +96,7 @@ export class FilmsController {
     description: 'Error in request fields',
     type: BadRequestSwagger,
   })
-  async updateFim(@Param('id') id: string, @Body() body: UpdateBodyDto) {
+  async updateFilm(@Param('id') id: string, @Body() body: UpdateBodyDto) {
     return this.filmservice.updateFilm(id, body);
   }
 
