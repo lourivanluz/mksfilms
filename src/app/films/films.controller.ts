@@ -31,7 +31,7 @@ export class FilmsController {
     type: BadRequestSwagger,
   })
   async save(@Body() body: RequestBodyDto) {
-    return this.filmservice.save(body);
+    return this.filmservice.saveNewFilm(body);
   }
 
   @Get()

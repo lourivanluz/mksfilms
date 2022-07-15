@@ -21,7 +21,7 @@ export class FilmsService {
     private readonly filmRepo: Repository<FilmsEntity>,
   ) {}
 
-  save = async (data: RequestBodyDto): Promise<ResponseBodyDto> => {
+  saveNewFilm = async (data: RequestBodyDto): Promise<ResponseBodyDto> => {
     const genres = await findOrCreateGenre(data.genres);
 
     const newfilm = await this.filmRepo.save(
