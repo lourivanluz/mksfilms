@@ -10,7 +10,6 @@ import { GenresEntity } from 'src/app/films/entites/genres.entity';
     TypeOrmModule.forRoot({
       type: 'postgres',
       url: process.env.DATABASE_URL,
-      synchronize: true,
       entities: [FilmsEntity, GenresEntity],
       //__dirname + '/**/*.entity{.js,.ts}'
     }),
