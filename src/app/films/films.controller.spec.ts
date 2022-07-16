@@ -45,7 +45,7 @@ describe('FilmsController', () => {
         {
           provide: FilmsService,
           useValue: {
-            save: jest.fn(),
+            saveNewFilm: jest.fn(),
             findAll: jest.fn(),
             getFilmByGenre: jest.fn(),
             getFilmById: jest.fn(),
@@ -65,7 +65,7 @@ describe('FilmsController', () => {
     expect(filmService).toBeDefined();
   });
 
-  describe('save', () => {
+  describe('saveNewFilm', () => {
     it('movie saved successfully', async () => {
       //mock
       const filmMock = {
@@ -79,7 +79,9 @@ describe('FilmsController', () => {
         ...filmMock,
         id: '548d6092-160c-4c47-a6f8-d587ed5d3622',
       };
-      jest.spyOn(filmService, 'save').mockResolvedValueOnce(filmMockSaved);
+      jest
+        .spyOn(filmService, 'saveNewFilm')
+        .mockResolvedValueOnce(filmMockSaved);
       //action
       const result = await filmController.save(filmMock);
       //expec
@@ -94,7 +96,7 @@ describe('FilmsController', () => {
         sinopse: 'nao sei como foi',
         genres: ['eletronico', 'aventura'],
       };
-      jest.spyOn(filmService, 'save').mockRejectedValueOnce(new Error());
+      jest.spyOn(filmService, 'saveNewFilm').mockRejectedValueOnce(new Error());
 
       expect(filmController.save(filmMock)).rejects.toThrowError();
     });
