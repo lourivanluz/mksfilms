@@ -51,12 +51,24 @@ export class FilmsService {
   };
 
   getFilmByGenre = async (genre) => {
-    //fazer uma query melhor
-    const result = await this.filmRepo.find({ relations: ['genres'] });
-    const serialized = result
-      .map((film) => this.serializerFilms(film))
-      .filter((film) => film.genres.includes(genre));
-    return serialized;
+    const filmsGenre = await this.filmRepo
+      .createQueryBuilder('films')
+      .select('films.id')
+      .innerJoin('films.genres', 'genres')
+      .where('genres.genre = :genre', { genre: genre })
+      .getMany();
+
+    const result = await Promise.all(
+      filmsGenre.map(async ({ id }) => {
+        const gen = await this.filmRepo.findOne({
+          where: { id: id },
+          relations: ['genres'],
+        });
+        return gen;
+      }),
+    );
+
+    return result.map((film) => this.serializerFilms(film));
   };
 
   deleteFilmById = async (id: string) => {
