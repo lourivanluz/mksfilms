@@ -4,8 +4,8 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
-  Put,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { RequestBodyDto, UpdateBodyDto } from './dto/save-film.dto';
@@ -77,7 +77,7 @@ export class FilmsController {
     return this.filmservice.getFilmById(id);
   }
 
-  @Put(':id')
+  @Patch(':id')
   @ApiOperation({
     summary: 'Updates the movie corresponding to the id passed as a parameter',
   })

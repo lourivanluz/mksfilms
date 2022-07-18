@@ -31,13 +31,13 @@ export class FilmsService {
     return this.serializerFilms(newfilm);
   };
 
-  findAll = async () => {
+  findAll = async (): Promise<Array<ResponseBodyDto>> => {
     const result = await this.filmRepo.find({ relations: ['genres'] });
     const serialized = result.map((film) => this.serializerFilms(film));
     return serialized;
   };
 
-  getFilmById = async (id: string) => {
+  getFilmById = async (id: string): Promise<ResponseBodyDto> => {
     const result = await this.filmRepo.findOne({
       where: { id: id },
       relations: ['genres'],
@@ -50,7 +50,7 @@ export class FilmsService {
     return this.serializerFilms(result);
   };
 
-  getFilmByGenre = async (genre) => {
+  getFilmByGenre = async (genre: string): Promise<Array<ResponseBodyDto>> => {
     const filmsGenre = await this.filmRepo
       .createQueryBuilder('films')
       .select('films.id')
@@ -71,7 +71,7 @@ export class FilmsService {
     return result.map((film) => this.serializerFilms(film));
   };
 
-  deleteFilmById = async (id: string) => {
+  deleteFilmById = async (id: string): Promise<null> => {
     const result = await this.filmRepo.delete({ id: id });
     if (!result) {
       throw new HttpException('Film ID not found', HttpStatus.NOT_FOUND);
@@ -79,7 +79,10 @@ export class FilmsService {
     return null;
   };
 
-  updateFilm = async (id: string, data: IUptadeFilm) => {
+  updateFilm = async (
+    id: string,
+    data: IUptadeFilm,
+  ): Promise<ResponseBodyDto> => {
     const filmFiltred = await this.filmRepo.findOne({
       where: { id: id },
       relations: ['genres'],

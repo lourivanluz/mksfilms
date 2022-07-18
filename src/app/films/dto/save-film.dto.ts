@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
 
 export class RequestBodyDto {
   @IsNotEmpty()
@@ -26,19 +26,24 @@ export class RequestBodyDto {
 
 export class UpdateBodyDto {
   @ApiPropertyOptional()
+  @IsOptional()
   title?: string;
 
   @IsNumber()
   @ApiPropertyOptional()
+  @IsOptional()
   releaseYear?: number;
 
   @ApiPropertyOptional()
+  @IsOptional()
   duration?: string;
 
   @ApiPropertyOptional()
+  @IsOptional()
   sinopse?: string;
 
   @ApiPropertyOptional()
+  @IsOptional()
   genres?: Array<string>;
 }
 
